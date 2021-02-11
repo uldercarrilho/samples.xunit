@@ -1,6 +1,17 @@
 using System;
 using Xunit;
 
+// When to use: when you want a clean test context for every test
+// (sharing the setup and cleanup code, without sharing the object instance).
+
+// xUnit.net creates a new instance of the test class for every test that is run, so any code which is placed into
+// the constructor of the test class will be run for every single test. This makes the constructor a convenient
+// place to put reusable context setup code where you want to share the code without sharing object instances
+// (meaning, you get a clean copy of the context object(s) for every test that is run).
+
+// This structure is sometimes called the "test class as context" pattern, since the test class itself is a
+// self-contained definition of the context setup and cleanup code.
+
 // Expectations List
 //      Context: Empty Stack
 //          Verify that Count is 0
@@ -25,6 +36,7 @@ using Xunit;
 
 public class StackTests
 {
+    // You can even name the test classes after the setup context so that it's easier to remember what your starting point is:
     public class EmptyStack
     {
         Stack<int> stack;
